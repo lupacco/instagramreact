@@ -29,13 +29,12 @@ let posts = [
 
 
 function Post(props){
-  function savePost(post){
-    console.log("salvou")
-    console.log(post)
-  }
-
-
   const [likesAmount, setLikesAmount] = React.useState(props.likes)
+  const [bookMark, setBookMark] = React.useState("bookmark-outline")
+  
+  function savePost(bookMark){
+    !(bookMark === "bookmark") ? setBookMark("bookmark") : setBookMark("bookmark-outline")
+  }
   
   function likePost(heartIcon){
     heartIcon.name = 'heart';
@@ -107,7 +106,9 @@ function Post(props){
                   <ion-icon name="paper-plane-outline"></ion-icon>
                 </div>
                 <div>
-                  <ion-icon name="bookmark-outline" data-test="save-post" onClick={savePost}></ion-icon>
+                  <ion-icon name={bookMark} data-test="save-post" onClick={() => {
+                    savePost(bookMark)
+                  }}></ion-icon>
                 </div>
               </div>
 
