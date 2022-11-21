@@ -5,6 +5,16 @@ import razoesparaacreditar from "../assets/img/razoesparaacreditar.svg";
 import adorable_animals from "../assets/img/adorable_animals.svg";
 import smallcutecats from "../assets/img/smallcutecats.svg";
 
+function Sugestion(props){
+  return(
+    <div class="sugestao">
+          <Usuario key={props.nome} nome={props.nome} img={props.img} />
+
+          <div class="seguir">Seguir</div>
+        </div>
+  )
+}
+
 export default function Sugestoes() {
   const users = [
     {
@@ -38,11 +48,7 @@ export default function Sugestoes() {
 
       {users.map(sugested => {
         return(
-        <div class="sugestao">
-          <Usuario nome={sugested.nome} img={sugested.img} />
-
-          <div class="seguir">Seguir</div>
-        </div>
+          <Sugestion key={sugested.nome} nome={sugested.nome} img={sugested.img} />
         )
       })}
     </div>

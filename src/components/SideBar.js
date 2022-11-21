@@ -1,16 +1,16 @@
 import Sugestoes from "./Sugestoes"
 import catanacomics from "../assets/img/catanacomics.svg"
 
-export default function SideBar(){
+export default function SideBar(props){
     return (
         <div class="sidebar">
-        <div class="usuario">
-          <img src={catanacomics} />
+        <div data-test="user" class="usuario">
+          <img data-test="profile-image" src={props.userImg} />
           <div class="texto">
-            <strong>catanacomics</strong>
-            <span>
-              Catana
-              <ion-icon name="pencil"></ion-icon>
+            <strong>{props.userNick}</strong>
+            <span data-test="name">
+              {props.userName}
+              <ion-icon data-test="edit-name" name="pencil"></ion-icon>
             </span>
           </div>
         </div>

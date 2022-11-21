@@ -7,6 +7,17 @@ import filomoderna from "../assets/img/filomoderna.svg"
 import img9gag from "../assets/img/9gag.svg";
 import memeriagourmet from "../assets/img/memeriagourmet.svg";
 
+function Story(props){
+  return (
+    <div class="story">
+                <div class="imagem">
+                  <img alt="" src={props.img} />
+                </div>
+                <div class="usuario">{props.nome}</div>
+              </div>
+  )
+}
+
 export default function Stories(){
   let stories = [
     {
@@ -47,12 +58,7 @@ export default function Stories(){
         <div class="stories">
           {stories.map(storie => {
             return (
-              <div class="story">
-                <div class="imagem">
-                  <img src={storie.img} />
-                </div>
-                <div class="usuario">{storie.nome}</div>
-              </div>
+              <Story key={storie.nome} img={storie.img} nome={storie.nome}/>
             )
           })}
 
