@@ -191,8 +191,8 @@ body {
 .post .conteudo img {
   width: 100%;
 }
-.conteudo ion-icon {
-  font-size: 0px;
+.conteudo .like {
+  font-size: 100px;
   position: absolute;
   color: rgb(255, 255, 255, 70%);
   top: 45%;
