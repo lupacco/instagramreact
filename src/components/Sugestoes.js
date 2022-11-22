@@ -7,10 +7,10 @@ import smallcutecats from "../assets/img/smallcutecats.svg";
 
 function Sugestion(props){
   return(
-    <div class="sugestao">
+    <div className="sugestao">
           <Usuario key={props.nome} nome={props.nome} img={props.img} />
 
-          <div class="seguir">Seguir</div>
+          <div className="seguir">Seguir</div>
         </div>
   )
 }
@@ -40,8 +40,8 @@ export default function Sugestoes() {
   ];
 
   return (
-    <div class="sugestoes">
-      <div class="titulo">
+    <div className="sugestoes">
+      <div className="titulo">
         Sugestões para você
         <div>Ver tudo</div>
       </div>

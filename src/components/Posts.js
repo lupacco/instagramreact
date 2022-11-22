@@ -9,26 +9,33 @@ import adorableAnimals from "../assets/img/adorable_animals.svg";
 
 let posts = [
   {
+    id: 1,
     img: meowed,
     user: "meowed",
     content: gatoTelefone,
     liked: respondeai,
     likedName: "respondeai",
-    likes: 101.523
+    likes: 101523,
+    isLiked: false,
+    isSaved: false
   },
   {
+    id: 2,
     img: barked,
     user: "barked",
     content: dog,
     liked: adorableAnimals,
     likedName: "adorable_animals",
-    likes: 99.159
+    likes: 99159,
+    isLiked: true,
+    isSaved: false
   }
 ];
 
 
 
 function Post(props){
+  const [liked, setLiked] = React.useState(props.isLiked)
   const [likesAmount, setLikesAmount] = React.useState(props.likes)
   const [bookMark, setBookMark] = React.useState("bookmark-outline")
   
@@ -36,70 +43,56 @@ function Post(props){
     !(bookMark === "bookmark") ? setBookMark("bookmark") : setBookMark("bookmark-outline")
   }
   
-  function likePost(heartIcon){
-    heartIcon.name = 'heart';
-    heartIcon.style.color = 'red';
-  }
-  function dislikePost(heartIcon){
-    heartIcon.name = 'heart-outline';
-    heartIcon.style.color = null;
-  }
   function likeDislike(event){
-    const postHeart = event.currentTarget.offsetParent.firstChild;
-
-    let heartIconHTML;
-    let postIsLiked = false;
-    //In case post is like by double click
-    if(event.currentTarget.classList.contains('conteudo')){
-      heartIconHTML = event.currentTarget.offsetParent.childNodes[3].firstChild.firstChild.firstChild
-      (heartIconHTML.name === 'heart') ? (postIsLiked = true) : (postIsLiked = false)
-      likePost(heartIconHTML)
-    }else{
-      //In case like is called from like button
-      heartIconHTML = event.currentTarget;
-      !(heartIconHTML.name === 'heart') ? likePost(heartIconHTML) : dislikePost(heartIconHTML)
-    }
-
-    //Activate like animation only if the pic is not being disliked
-    if(heartIconHTML.name === 'heart'){
-      console.log(typeof(likesAmount))
-      const incrementedNum = String(Number(likesAmount.replaceAll(".",""))+1);
-      const numSize = likesAmount.replaceAll(".",",").length
-
-      if(!postIsLiked){
-        setLikesAmount(incrementedNum.slice(0,(Math.floor(numSize/2))) + '.' +incrementedNum.slice(-3))
-      }
-      postHeart.style.animation = 'postHeartAnimation 0.5s';
-      setTimeout(() => {
-        postHeart.style.animation = null;
-      }, 500)
+    if(liked === false){
+      console.log(event)
+      event.currentTarget.name = 'heart'
+      event.currentTarget.style.color = 'red'
+      setLiked(true)
     } else{
-        const decrementedNum = String(Number(likesAmount.replaceAll('.', ""))-1)
-        const numSize = likesAmount.replaceAll(".","".length)
-
-        setLikesAmount(decrementedNum.slice(0,(Math.floor(numSize/2))) + '.' +decrementedNum.slice(-3))
+      event.currentTarget.name = 'heart-outline'
+      event.currentTarget.style.color = null
+      setLiked(false)
     }
+    console.log('like')
+  }
+
+  function likeByScreen(event){
+    console.log(event)
+    event.currentTarget.name = 'heart'
+    event.currentTarget.style.color = 'red'
+    likeAnimation()
+    setLiked(true) 
+  }
+  function likeAnimation(){
+    console.log("bucica")
+    let heartDoubleClick = document.querySelector('.like')
+    heartDoubleClick.classList.add('likeAnimation')
+    setTimeout(() => {
+      heartDoubleClick.classList.remove('likeAnimation')
+    }, 500)
   }
   
+  
   return (
-    <div class="post">
-            <div class="topo">
-              <div class="usuario">
+    <div className="post">
+            <div className="topo">
+              <div className="usuario">
                 <img alt="" src={props.img} />
                 {props.user}
               </div>
-              <div class="acoes">
+              <div className="acoes">
                 <ion-icon name="ellipsis-horizontal"></ion-icon>
               </div>
             </div>
 
-            <div class="conteudo">
+            <div className="conteudo">
             <ion-icon class="like" name="heart"></ion-icon>
-              <img alt="" data-test="post-image" src={props.content} onDoubleClick={likeDislike}/>
+              <img alt="" data-test="post-image" src={props.content} onDoubleClick={likeByScreen}/>
             </div>
 
-            <div class="fundo">
-              <div class="acoes">
+            <div className="fundo">
+              <div className="acoes">
                 <div>
                   <ion-icon data-test="like-post" name="heart-outline" onClick={likeDislike}></ion-icon>
                   <ion-icon name="chatbubble-outline"></ion-icon>
@@ -112,9 +105,9 @@ function Post(props){
                 </div>
               </div>
 
-              <div class="curtidas">
+              <div className="curtidas">
                 <img alt="" src={props.liked} />
-                <div class="texto">
+                <div className="texto">
                   Curtido por <strong>{props.likedName}</strong> e{" "}
                   <strong data-test="likes-number">outras {props.likes} pessoas</strong>
                 </div>
@@ -126,10 +119,19 @@ function Post(props){
 
 export default function Posts() {
   return (  
-    <div class="posts">
+    <div className="posts">
       {posts.map((post) => {
         return (
-          <Post key={post.nome} img={post.img} user={post.user} content={post.content} liked={post.liked} likedName={post.likedName} likes={post.likes} />
+          <Post 
+          key={post.id} 
+          img={post.img} 
+          user={post.user} 
+          content={post.content} 
+          liked={post.liked} 
+          likedName={post.likedName} 
+          likes={post.likes}
+          isLiked={post.isLiked}
+          isSaved={post.isSaved} />
       );
       })}
     </div>

@@ -7,8 +7,8 @@ export default function SideBar(props){
     const [img, setImg] = React.useState(props.userImg)
 
     return (
-        <div class="sidebar">
-        <div data-test="user" class="usuario">
+        <div className="sidebar">
+        <div data-test="user" className="usuario">
           <img alt="" data-test="profile-image" src={img} onClick={() => {
             let newImg = prompt("Nova url para imagem de perfil do usuário!")
             if(!newImg){
@@ -17,7 +17,7 @@ export default function SideBar(props){
               setImg(newImg)
             }
           }}/>
-          <div class="texto">
+          <div className="texto">
             <strong>{props.userNick}</strong>
             <span data-test="name">
               {userName}
@@ -30,12 +30,12 @@ export default function SideBar(props){
 
         <Sugestoes/>
 
-        <div class="links">
+        <div className="links">
           Sobre • Ajuda • Imprensa • API • Carreiras • Privacidade • Termos •
           Localizações • Contas mais relevantes • Hashtags • Idioma
         </div>
 
-        <div class="copyright">© 2021 INSTAGRAM DO FACEBOOK</div>
+        <div className="copyright">© 2021 INSTAGRAM DO FACEBOOK</div>
       </div>
         
     )

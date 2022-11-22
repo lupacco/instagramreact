@@ -1,10 +1,10 @@
 export default function Usuario(props) {
   return (
-    <div class="usuario">
-      <img src={props.img} />
-      <div class="texto">
-        <div class="nome">{props.nome}</div>
-        <div class="razao">Segue você</div>
+    <div className="usuario">
+      <img alt="" src={props.img} />
+      <div className="texto">
+        <div className="nome">{props.nome}</div>
+        <div className="razao">Segue você</div>
       </div>
     </div>
   );

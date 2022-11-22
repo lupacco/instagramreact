@@ -9,11 +9,11 @@ import memeriagourmet from "../assets/img/memeriagourmet.svg";
 
 function Story(props){
   return (
-    <div class="story">
-                <div class="imagem">
+    <div className="story">
+                <div className="imagem">
                   <img alt="" src={props.img} />
                 </div>
-                <div class="usuario">{props.nome}</div>
+                <div className="usuario">{props.nome}</div>
               </div>
   )
 }
@@ -55,14 +55,14 @@ export default function Stories(){
   ]
 
     return (
-        <div class="stories">
+        <div className="stories">
           {stories.map(storie => {
             return (
               <Story key={storie.nome} img={storie.img} nome={storie.nome}/>
             )
           })}
 
-          <div class="setinha">
+          <div className="setinha">
             <ion-icon name="chevron-forward-circle"></ion-icon>
           </div>
         </div>
